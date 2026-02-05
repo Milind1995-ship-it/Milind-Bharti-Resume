@@ -1,362 +1,206 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milind Bharti | Creative Multimedia Producer & Writer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutrals (e.g., beige, off-white, slate gray, subtle warm accent) -->
-    <!-- Application Structure Plan: A single-page portfolio designed as an interactive dashboard. The structure includes a sticky navigation, a vertical interactive timeline for experience, a skills visualization chart, and a filterable portfolio gallery. This design was chosen to transform the static resume into an engaging, user-directed experience, allowing recruiters to quickly access specific information (like videos or articles) without scrolling through irrelevant text. -->
-    <!-- Visualization & Content Choices:
-        - Experience: Report Info -> Chronological job history. Goal -> Show career progression. Viz/Method -> Interactive vertical timeline (HTML/CSS/JS). Interaction -> Click to expand details. Justification -> Cleaner and more engaging than a long list.
-        - Skills: Report Info -> List of skills. Goal -> Visualize skill set and proficiency. Viz/Method -> Categorized Bar Chart (Chart.js). Interaction -> Hover for details. Justification -> More dynamic and visually appealing than a static list.
-        - Portfolio: Report Info -> Long list of URLs. Goal -> Organize and allow exploration of work. Viz/Method -> Filterable card gallery (HTML/CSS/JS). Interaction -> Filter buttons (All, Articles, Videos). Justification -> Vastly improves usability and allows recruiters to find relevant samples instantly. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8;
-            color: #333;
-        }
-        .nav-link {
-            transition: color 0.3s, border-bottom-color 0.3s;
-        }
-        .nav-link:hover {
-            color: #C084FC;
-        }
-        .active-nav {
-            color: #C084FC;
-            border-bottom: 2px solid #C084FC;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 50vh;
-        }
-        .timeline-item {
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .timeline-item.active {
-            background-color: #F3E8FF;
-        }
-        .portfolio-btn.active {
-            background-color: #A78BFA;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Milind Bharti | Digital Producer & Writer</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FDFBF8;
+      color: #333;
+    }
+    .timeline-item {
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .timeline-item.active {
+      background-color: #F3E8FF;
+    }
+    .portfolio-btn.active {
+      background-color: #A78BFA;
+      color: #fff;
+    }
+  </style>
 </head>
+
 <body class="antialiased">
 
-    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-purple-600">Milind Bharti</h1>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link text-gray-600 font-medium">About</a>
-                <a href="#experience" class="nav-link text-gray-600 font-medium">Experience</a>
-                <a href="#skills" class="nav-link text-gray-600 font-medium">Skills</a>
-                <a href="#portfolio" class="nav-link text-gray-600 font-medium">Portfolio</a>
-                <a href="#contact" class="nav-link text-gray-600 font-medium">Contact</a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-             <a href="#about" class="block py-2 text-gray-600 font-medium">About</a>
-             <a href="#experience" class="block py-2 text-gray-600 font-medium">Experience</a>
-             <a href="#skills" class="block py-2 text-gray-600 font-medium">Skills</a>
-             <a href="#portfolio" class="block py-2 text-gray-600 font-medium">Portfolio</a>
-             <a href="#contact" class="block py-2 text-gray-600 font-medium">Contact</a>
-        </div>
-    </header>
+<!-- NAV -->
+<header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-purple-600">Milind Bharti</h1>
+    <div class="hidden md:flex space-x-8">
+      <a href="#about" class="text-gray-600 font-medium">About</a>
+      <a href="#experience" class="text-gray-600 font-medium">Experience</a>
+      <a href="#skills" class="text-gray-600 font-medium">Skills</a>
+      <a href="#portfolio" class="text-gray-600 font-medium">Portfolio</a>
+      <a href="#contact" class="text-gray-600 font-medium">Contact</a>
+    </div>
+  </nav>
+</header>
 
-    <main class="container mx-auto px-6 py-12">
+<main class="container mx-auto px-6 py-12">
 
-        <section id="about" class="min-h-screen flex items-center justify-center text-center">
-            <div>
-                <h2 class="text-5xl md:text-6xl font-bold tracking-tight text-gray-800">Creative Multimedia Producer & Writer</h2>
-                <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-600">
-                   Creative Producer & Writer focused on digital-first tech and automotive storytelling. I’ve worked across platforms like Times Internet, NDTV, and Cashify, owning the full content lifecycle from idea to execution. Known for simplifying complex tech into clear, engaging narratives built for digital audiences.
-                <a href="#portfolio" class="mt-8 inline-block bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition-transform transform hover:scale-105">View My Work</a>
-            </div>
-        </section>
+<!-- ABOUT -->
+<section id="about" class="min-h-screen flex flex-col items-center justify-center text-center">
+  <h2 class="text-5xl md:text-6xl font-bold text-gray-800">
+    Digital Producer & Writer
+  </h2>
 
-        <section id="experience" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Career Journey</h2>
-            <div class="flex flex-col md:flex-row gap-8">
-                <div id="timeline-nav" class="md:w-1/3 space-y-2">
-                </div>
-                <div id="experience-details" class="md:w-2/3 bg-white p-8 rounded-lg shadow-md min-h-[300px]">
-                    <p class="text-gray-500 text-center pt-20">Select a role from the timeline to see details.</p>
-                </div>
-            </div>
-        </section>
+  <p class="mt-6 max-w-3xl text-lg text-gray-600">
+    Creative Producer & Writer focused on digital-first tech and automotive storytelling.
+    Experienced across Times Internet, NDTV, and Cashify, with end-to-end ownership
+    from research and scripting to on-camera delivery, production, and distribution.
+  </p>
 
-        <section id="skills" class="py-20 bg-purple-50 rounded-lg">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Core Competencies</h2>
-            <div class="chart-container">
-                <canvas id="skillsChart"></canvas>
-            </div>
-        </section>
+  <a href="#portfolio"
+     class="mt-8 inline-block bg-purple-600 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition">
+    View My Work
+  </a>
+</section>
 
-        <section id="portfolio" class="py-20">
-            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Portfolio</h2>
-            <p class="text-center text-gray-600 mb-12">A selection of my work. Filter by category to explore.</p>
-            <div id="portfolio-filters" class="flex justify-center flex-wrap gap-2 mb-8">
-            </div>
-            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            </div>
-        </section>
-    </main>
+<!-- EXPERIENCE -->
+<section id="experience" class="py-20">
+  <h2 class="text-4xl font-bold text-center mb-12">Career Journey</h2>
 
-    <footer id="contact" class="bg-gray-800 text-white">
-        <div class="container mx-auto px-6 py-12 text-center">
-            <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
-            <p class="mb-6">I'm currently open to new opportunities. Feel free to reach out.</p>
-            <div class="flex justify-center items-center space-x-6">
-                <a href="mailto:milindbharti08@gmail.com" class="hover:text-purple-400 transition-colors">milindbharti08@gmail.com</a>
-                <span class="text-gray-500">|</span>
-                <a href="tel:9582000103" class="hover:text-purple-400 transition-colors">+91 9582000103</a>
-                 <span class="text-gray-500">|</span>
-                <a href="https://gracefulopinions.wordpress.com" target="_blank" rel="noopener noreferrer" class="hover:text-purple-400 transition-colors">Blog</a>
-            </div>
-             <p class="mt-8 text-sm text-gray-500">&copy; 2025 Milind Bharti. All Rights Reserved.</p>
-        </div>
-    </footer>
+  <div class="flex flex-col md:flex-row gap-8">
+    <div id="timeline-nav" class="md:w-1/3 space-y-2"></div>
+    <div id="experience-details" class="md:w-2/3 bg-white p-8 rounded-lg shadow-md min-h-[300px]"></div>
+  </div>
+</section>
 
-    <script>
-        const experienceData = [
-            {
-                company: "Hardwire",
-                role: "Senior Anchor & Producer",
-                period: "March 2025 – June 2025",
-                details: [
-                    "Anchored and produced weekly tech and auto review segments, delivering in-depth analysis and engaging content to a national audience.",
-                    "Managed all phases of segment production, including comprehensive research, scriptwriting, on-air presentation, and post-production oversight.",
-                    "Translated complex technical and automotive concepts into accessible and compelling narratives for broad viewership."
-                ]
-            },
-            {
-                company: "Freelance",
-                role: "Content Writer",
-                period: "July 2024 – November 2024",
-                details: [
-                    "Authored and contributed editorial and branded articles for prominent publications, including Indian Express.",
-                    "Collaborated with editorial teams to align content with publication style and audience expectations.",
-                ]
-            },
-            {
-                company: "Cashify",
-                role: "Tech Anchor/Producer/Writer",
-                period: "August 2023 – July 2024",
-                details: [
-                    "Hosted and produced 'Cashify TechByte' for Instagram, significantly boosting engagement.",
-                    "Researched, wrote, scripted, and managed all content for Cashify's official YouTube and Instagram platforms.",
-                    "Supervised post-editing and optimized thumbnails for both long-form and short-form video content.",
-                    "Curated engaging branded content, enhancing brand presence on Cashify's official page."
-                ]
-            },
-            {
-                company: "Gadgets Now - Times Internet",
-                role: "Multimedia Producer and Writer",
-                period: "September 2022 – April 2023",
-                details: [
-                    "Identified and researched trending consumer technology video topics, consistently pitching innovative new video formats.",
-                    "Thoroughly tested devices for in-depth reviews, ensuring accurate and reliable content.",
-                    "Directed the complete video production lifecycle, including scripting, anchoring, production, packaging, and post-editing supervision."
-                ]
-            },
-            {
-                company: "NDTV",
-                role: "Associate Producer & Writer",
-                period: "May 2021 – March 2022",
-                details: [
-                    "Served as Producer for the popular weekly show 'Cell Guru.'",
-                    "Managed brand integrations and content for partners including Dolby, Qualcomm, OPPO, and LG.",
-                    "Conducted rigorous gadget research, wrote detailed scripts for host Rajiv Makhni, and oversaw all production.",
-                    "Managed and grew 'Cell Guru' social media presence on YouTube and Twitter."
-                ]
-            },
-            {
-                company: "TIMES NETWORK",
-                role: "Documentary Producer & Writer",
-                period: "October 2020 – May 2021",
-                details: [
-                    "Led the creative transformation of ideas into compelling crime documentaries.",
-                    "Executed comprehensive research, rigorous fact-checking, strategic pitching, and scriptwriting.",
-                    "Coordinated technical teams, managed interviews, planned shoots, and supervised post-production."
-                ]
-            },
-             {
-                company: "TIMES NOW",
-                role: "Assistant Producer",
-                period: "Nov 2018 – Nov 2019",
-                details: [
-                   "Assisted with pre-production, managed production logistics, and supervised post-production.",
-                    "Oversaw weekend shows, including managing outdoor promotional movie shoots.",
-                    "Responsible for creative packaging and presentation of news segments."
-                ]
-            }
-        ];
+<!-- SKILLS -->
+<section id="skills" class="py-20 bg-purple-50 rounded-lg">
+  <h2 class="text-4xl font-bold text-center mb-12">Core Competencies</h2>
+  <div class="max-w-3xl mx-auto h-[350px]">
+    <canvas id="skillsChart"></canvas>
+  </div>
+</section>
 
-        const portfolioData = [
-            { title: "Elevate Your Outdoor Space", type: "Article", client: "Indian Express", url: "https://indianexpress.com/article/business/sponsored-business/elevate-your-outdoor-space-and-discover-exciting-deals-during-amazon-indias-great-summer-sale-9309925/" },
-            { title: "Top Smartphones Under ₹40K", type: "Article", client: "Indian Express", url: "https://indianexpress.com/article/technology/sponsored/prime-picks-top-smartphones-under-40k-you-shouldnt-miss-9453168/" },
-            { title: "OnePlus Nord CE4 Lite Features", type: "Article", client: "Indian Express", url: "https://indianexpress.com/article/technology/sponsored/top-5-features-that-make-the-oneplus-nord-ce4-lite-your-go-to-device-under-20k-9417906/" },
-            { title: "Cashify Tech Content (YouTube)", type: "Video", client: "Cashify", url: "https://youtu.be/5n_YDhQA9jw?si=xtVEOWSVjx-16ji9" },
-            { title: "Cell Guru's Diwali Gifting Guide", type: "Video", client: "NDTV", url: "https://gadgets.ndtv.com/videos/cell-gurus-diwali-gifting-guide-607568" },
-            { title: "Realme GT Neo 2 Review", type: "Video", client: "NDTV", url: "https://gadgets.ndtv.com/videos/realme-gt-neo-2-samsung-galaxy-buds-2-review-605936" },
-            { title: "Crypto Unfiltered: China Ban", type: "Video", client: "NDTV", url: "https://gadgets.ndtv.com/videos/crypto-unfiltered-heres-why-china-has-banned-cryptocurrency-605772?from=crypto-microsite" },
-            { title: "Times Now Build India Campaign", type: "Video", client: "Times Now", url: "https://www.youtube.com/watch?v=65W7zb9BUjM&t=938s" },
-            { title: "Why the Royal Enfield Interceptor is Perfect", type: "Blog", client: "Personal Blog", url: "https://gracefulopinions.wordpress.com/2020/04/28/why-the-royal-enfield-interceptor-is-perfect-almost/" },
-            { title: "How Apple is Losing Its Mojo", type: "Blog", client: "Personal Blog", url: "https://gracefulopinions.wordpress.com/2018/10/10/how-apple-is-losing-its-mojo/" }
-        ];
+<!-- PORTFOLIO -->
+<section id="portfolio" class="py-20">
+  <h2 class="text-4xl font-bold text-center mb-4">Portfolio</h2>
+  <p class="text-center text-gray-600 mb-12">
+    Selected work across video, articles, and long-form storytelling.
+  </p>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const timelineNav = document.getElementById('timeline-nav');
-            const experienceDetails = document.getElementById('experience-details');
-            const portfolioFilters = document.getElementById('portfolio-filters');
-            const portfolioGrid = document.getElementById('portfolio-grid');
+  <div id="portfolio-filters" class="flex justify-center gap-2 mb-8"></div>
+  <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+</section>
 
-            function displayExperience(index) {
-                const exp = experienceData[index];
-                experienceDetails.innerHTML = `
-                    <h3 class="text-2xl font-bold text-gray-800">${exp.role}</h3>
-                    <p class="text-purple-600 font-semibold mb-2">${exp.company}</p>
-                    <p class="text-sm text-gray-500 mb-4">${exp.period}</p>
-                    <ul class="space-y-2 list-disc list-inside text-gray-600">
-                        ${exp.details.map(d => `<li>${d}</li>`).join('')}
-                    </ul>
-                `;
+</main>
 
-                document.querySelectorAll('.timeline-item').forEach((item, i) => {
-                    item.classList.toggle('active', i === index);
-                });
-            }
+<!-- FOOTER -->
+<footer id="contact" class="bg-gray-800 text-white">
+  <div class="container mx-auto px-6 py-12 text-center">
+    <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+    <p class="mb-6">Open to digital producer & content roles.</p>
 
-            experienceData.forEach((exp, index) => {
-                const item = document.createElement('div');
-                item.className = 'timeline-item p-4 rounded-lg border border-gray-200 hover:bg-purple-50';
-                item.innerHTML = `<h4 class="font-semibold">${exp.company}</h4><p class="text-sm text-gray-500">${exp.role}</p>`;
-                item.addEventListener('click', () => displayExperience(index));
-                timelineNav.appendChild(item);
-            });
+    <div class="flex justify-center gap-4 text-sm">
+      <a href="mailto:milindbharti08@gmail.com">milindbharti08@gmail.com</a>
+      <span>|</span>
+      <a href="tel:9582000103">+91 9582000103</a>
+    </div>
 
-            if (experienceData.length > 0) {
-                 displayExperience(0);
-            }
+    <p class="mt-6 text-xs text-gray-400">
+      © 2025 Milind Bharti
+    </p>
+  </div>
+</footer>
 
-            function renderPortfolio(filter = 'All') {
-                portfolioGrid.innerHTML = '';
-                const filteredData = filter === 'All' ? portfolioData : portfolioData.filter(p => p.type === filter);
-                filteredData.forEach(item => {
-                    const card = document.createElement('a');
-                    card.href = item.url;
-                    card.target = '_blank';
-                    card.rel = 'noopener noreferrer';
-                    card.className = 'block bg-white p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all';
-                    card.innerHTML = `
-                        <div class="flex justify-between items-start mb-4">
-                             <h4 class="text-lg font-semibold text-gray-800">${item.title}</h4>
-                             <span class="text-xs font-semibold uppercase text-white bg-purple-500 px-2 py-1 rounded-full">${item.type}</span>
-                        </div>
-                        <p class="text-sm text-gray-500">Client: ${item.client}</p>
-                    `;
-                    portfolioGrid.appendChild(card);
-                });
-            }
+<!-- DATA + LOGIC -->
+<script>
+const experienceData = [
+  {
+    company: "Cashify",
+    role: "Tech Anchor & Producer",
+    period: "Aug 2023 – Jul 2024",
+    details: [
+      "Produced digital-first tech content across Instagram and YouTube.",
+      "Owned content lifecycle from ideation to on-camera delivery.",
+      "Led branded storytelling without compromising editorial clarity."
+    ]
+  },
+  {
+    company: "Gadgets Now (Times Internet)",
+    role: "Multimedia Producer & Writer",
+    period: "Sep 2022 – Apr 2023",
+    details: [
+      "Researched, scripted, anchored, and produced consumer tech videos.",
+      "Pitched and executed platform-native digital formats."
+    ]
+  },
+  {
+    company: "NDTV",
+    role: "Associate Producer & Writer",
+    period: "May 2021 – Mar 2022",
+    details: [
+      "Producer for the weekly tech show Cell Guru.",
+      "Wrote scripts and managed brand integrations with Dolby, Qualcomm, OPPO."
+    ]
+  }
+];
 
-            const categories = ['All', ...new Set(portfolioData.map(p => p.type))];
-            categories.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.textContent = cat;
-                btn.className = 'portfolio-btn px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-full hover:bg-purple-200 transition-colors';
-                if(cat === 'All') btn.classList.add('active');
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.portfolio-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    renderPortfolio(cat);
-                });
-                portfolioFilters.appendChild(btn);
-            });
+const portfolioData = [
+  { title: "Cashify TechByte", type: "Video", url: "https://youtu.be/5n_YDhQA9jw" },
+  { title: "Cell Guru – NDTV", type: "Video", url: "https://gadgets.ndtv.com/videos" },
+  { title: "Indian Express Tech Articles", type: "Article", url: "https://indianexpress.com" }
+];
 
-            renderPortfolio();
+const timelineNav = document.getElementById("timeline-nav");
+const experienceDetails = document.getElementById("experience-details");
 
-            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
-            new Chart(skillsCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Content Creation', 'Video Production', 'Scriptwriting', 'Project Management', 'Social Media Strategy', 'Adobe Premiere Pro'],
-                    datasets: [{
-                        label: 'Proficiency',
-                        data: [95, 90, 95, 85, 88, 92],
-                        backgroundColor: 'rgba(167, 139, 250, 0.6)',
-                        borderColor: 'rgba(139, 92, 246, 1)',
-                        borderWidth: 1,
-                        borderRadius: 5
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw}%`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: {
-                                display: false
-                            }
-                        },
-                        y: {
-                           grid: {
-                                display: false
-                            }
-                        }
-                    }
-                }
-            });
+experienceData.forEach((exp, i) => {
+  const div = document.createElement("div");
+  div.className = "timeline-item p-4 border rounded";
+  div.innerHTML = `<strong>${exp.company}</strong><br><span class="text-sm">${exp.role}</span>`;
+  div.onclick = () => showExperience(i);
+  timelineNav.appendChild(div);
+});
 
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+function showExperience(i) {
+  const e = experienceData[i];
+  experienceDetails.innerHTML = `
+    <h3 class="text-2xl font-bold">${e.role}</h3>
+    <p class="text-purple-600">${e.company}</p>
+    <p class="text-sm mb-4">${e.period}</p>
+    <ul class="list-disc list-inside">
+      ${e.details.map(d => `<li>${d}</li>`).join("")}
+    </ul>`;
+}
 
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                     if (mobileMenu.classList.contains('hidden') === false) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
-            });
-        });
+showExperience(0);
 
-    </script>
+// Skills chart
+new Chart(document.getElementById("skillsChart"), {
+  type: "bar",
+  data: {
+    labels: ["Video Production", "Scriptwriting", "Hosting", "Storytelling", "Platform Strategy"],
+    datasets: [{
+      data: [90, 95, 90, 95, 88],
+      backgroundColor: "rgba(167,139,250,0.7)"
+    }]
+  },
+  options: {
+    indexAxis: "y",
+    plugins: { legend: { display: false } },
+    scales: { x: { max: 100, beginAtZero: true } }
+  }
+});
+</script>
+
 </body>
 </html>
